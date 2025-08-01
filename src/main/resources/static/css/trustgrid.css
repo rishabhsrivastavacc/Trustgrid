@@ -1,0 +1,117 @@
+/* General Reset and Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #0078d7 0%, #00adef 100%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #333;
+}
+
+/* Container for Login */
+.login-container {
+  background: #ffffff;
+  padding: 40px 50px;
+  border-radius: 10px;
+  max-width: 400px;
+  width: 90%;
+  box-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.1),
+    0 1px 3px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+/* Title */
+.login-container h2 {
+  color: #0078d7;
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 25px;
+  letter-spacing: 1.2px;
+  font-family: 'Segoe UI Semibold', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Form Elements */
+.login-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.login-container label {
+  text-align: left;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #004a91;
+}
+
+.login-container input[type="text"],
+.login-container input[type="password"] {
+  padding: 12px 14px;
+  border: 2px solid #0078d7;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.login-container input[type="text"]:focus,
+.login-container input[type="password"]:focus {
+  border-color: #005ea9;
+  outline: none;
+}
+
+/* Submit Button */
+.login-container input[type="submit"] {
+  background-color: #0078d7;
+  color: white;
+  padding: 14px 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-container input[type="submit"]:hover {
+  background-color: #005ea9;
+}
+
+/* Error and Logout Messages */
+.message {
+  margin-bottom: 15px;
+  padding: 12px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.message.error {
+  background-color: rgba(255, 77, 79, 0.15);
+  color: #ff4d4f;
+  border: 1px solid #ff4d4f;
+}
+
+.message.logout {
+  background-color: rgba(40, 167, 69, 0.15);
+  color: #28a745;
+  border: 1px solid #28a745;
+}
+
+/* Responsive Adjustment */
+@media (max-width: 480px) {
+  .login-container {
+    padding: 30px 25px;
+  }
+  .login-container h2 {
+    font-size: 1.8rem;
+  }
+}

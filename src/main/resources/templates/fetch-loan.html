@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Fetch Loan Details - TrustGrid</title>
+    <link rel="stylesheet" href="/css/trustgrid-form.css"/>
+    <style>
+        /* Add minimal styling or refer your existing CSS */
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        label, input, button { font-size: 1rem; margin-bottom: 10px; }
+        button {
+          cursor: pointer; padding: 6px 12px;
+          background-color: #0078d7; color: white; border: none; border-radius: 4px;
+        }
+        button:hover { background-color: #005ea9; }
+        .loan-details {
+          margin-top: 20px; border: 1px solid #ccc; padding: 15px; border-radius: 6px; max-width: 700px;
+        }
+        .loan-item {
+          border-bottom: 1px solid #eee; padding: 10px 0;
+        }
+        .loan-item:last-child { border-bottom: none; }
+        .flag-true { color: red; font-weight: bold; }
+        .flag-false { color: green; font-weight: bold; }
+
+        table {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+th, td {
+  padding: 8px 12px;
+}
+
+th {
+  text-align: left;
+}
+
+    </style>
+</head>
+<body>
+
+<h2>Fetch Loan Details</h2>
+
+<label for="panInput">Enter PAN:</label>
+<input type="text" id="panInput" maxlength="10" placeholder="ABCDE12"/>
+<button onclick="fetchLoanDetails()">Fetch Loan</button>
+
+<div id="resultContainer" class="loan-details" style="display:none;"></div>
+
+<script>
+    async function fetchLoanDetails() {
+  const pan = document.getElementById("panInput").value.trim();
+  const resultDiv = document.getElementById("resultContainer");
+
+  if (!pan) {
+    alert("Please enter a valid PAN.");
+    return;
+  }
+
+  resultDiv.style.display = "block";
+  resultDiv.innerHTML = "Loading loan details...";
+
+  try {
+    const response = await fetch(`/api/loan/list-with-alert?pan=${encodeURIComponent(pan)}`);
+    if (!response.ok) throw new Error("Failed to fetch loan details.");
+
+    const data = await response.json();
+
+    let html = `<p><b>Stack Alert Generated:</b> ${data.stackAlertGenerated ? '<span style="color:red;font-weight:bold;">Yes</span>' : '<span style="color:green;font-weight:bold;">No</span>'}</p>`;
+    html += `<p><b>Risk Free Amount:</b> ₹${data.riskFreeAmount.toLocaleString()}</p>`;
+
+    if (data.loans && data.loans.length > 0) {
+      html += "<h3>Loan Applications:</h3>";
+      html += `<table border="1" cellspacing="0" cellpadding="8" style="border-collapse: collapse; width: 100%; max-width: 700px;">
+        <thead style="background-color: #0078d7; color: white;">
+          <tr>
+            <th>ID</th>
+            <th>Amount (₹)</th>
+            <th>Status</th>
+            <th>Applied On</th>
+            <th>Lender</th>
+            <th>Alert Generated</th>
+          </tr>
+        </thead>
+        <tbody>`;
+
+      data.loans.forEach(loan => {
+        html += `<tr>
+          <td>${loan.id}</td>
+          <td style="text-align: right;">${loan.amount.toLocaleString()}</td>
+          <td>${loan.status}</td>
+          <td>${loan.appliedOn}</td>
+          <td>${loan.lender}</td>
+          <td style="color:${loan.alertGenerated ? 'red' : 'green'}; font-weight:bold;">
+            ${loan.alertGenerated ? 'Yes' : 'No'}
+          </td>
+        </tr>`;
+      });
+
+      html += "</tbody></table>";
+    } else {
+      html += "<p>No loan applications found.</p>";
+    }
+
+    resultDiv.innerHTML = html;
+
+  } catch (error) {
+    resultDiv.innerHTML = `<p style="color:red;">Error: ${error.message}</p>`;
+  }
+}
+
+</script>
+<p><a href="/home">Back to Home</a></p>
+</body>
+</html>

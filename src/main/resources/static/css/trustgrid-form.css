@@ -1,0 +1,95 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #eaf6ff 60%, #bfeaff 100%);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+.loan-form-container {
+  background: #fff;
+  max-width: 400px;
+  margin: 40px auto 0;
+  border-radius: 11px;
+  padding: 40px 36px 30px 36px;
+  box-shadow: 0 8px 32px rgba(0,120,215,0.12);
+  border: 1px solid #e0ebf7;
+}
+
+.loan-form-container h2 {
+  color: #0078d7;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 24px;
+  letter-spacing: 1.1px;
+}
+
+.loan-form-container label {
+  display: block;
+  margin-bottom: 8px;
+  color: #1466a3;
+  font-weight: 600;
+}
+
+.loan-form-container input[type="text"],
+.loan-form-container input[type="number"] {
+  display: block;
+  width: 100%;
+  padding: 13px 12px;
+  margin-bottom: 20px;
+  font-size: 1rem;
+  border: 2px solid #a3d2fa;
+  border-radius: 6px;
+  background: #f7fbff;
+  transition: border-color 0.25s;
+}
+
+.loan-form-container input[type="text"]:focus,
+.loan-form-container input[type="number"]:focus {
+  border-color: #0078d7;
+  outline: none;
+  background: #ecf5ff;
+}
+
+.loan-form-container button[type="submit"] {
+  width: 100%;
+  background-color: #0078d7;
+  color: #fff;
+  font-size: 1.15rem;
+  font-weight: 600;
+  padding: 14px 0;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: background-color 0.22s;
+  letter-spacing: 1px;
+  margin-top: 4px;
+  box-shadow: 0 3px 9px 0 rgba(0,120,215,0.08);
+}
+
+.loan-form-container button[type="submit"]:hover {
+  background-color: #005ea9;
+}
+
+.loan-form-container a {
+  display: block;
+  text-align: center;
+  margin-top: 24px;
+  color: #0078d7;
+  text-decoration: none;
+  font-size: 1.01rem;
+  transition: color 0.23s;
+}
+
+.loan-form-container a:hover {
+  color: #005ea9;
+  text-decoration: underline;
+}
+
+/* Responsive: shrink form on phone screens */
+@media (max-width: 500px) {
+  .loan-form-container {
+    padding: 20px 5vw;
+    max-width: 96vw;
+  }
+}
